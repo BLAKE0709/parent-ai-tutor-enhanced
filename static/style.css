@@ -1,0 +1,50 @@
+/* Custom styles for Parent‑AI Tutor */
+
+/* Use the Inter font loaded from Google Fonts */
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+#chat-box {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Chat bubbles */
+/* Customize chat bubble appearance */
+.chat-bubble {
+  border-radius: 1rem;
+  white-space: pre-wrap;
+}
+/* Primary chat bubble (user) */
+.bg-primary {
+  background-color: #0052cc !important;
+}
+/* Secondary chat bubble (assistant) */
+.bg-secondary {
+  background-color: #17a2b8 !important;
+}
+/* Ensure text stays white in bubbles */
+.text-white {
+  color: #fff !important;
+}
+
+/* Suggestions styling */
+#suggestions h5 {
+  margin-bottom: 0.5rem;
+}
+
+#suggestions .btn {
+  margin-bottom: 0.25rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+}
+
+/* Hero header text adjustments */
+header .lead {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
