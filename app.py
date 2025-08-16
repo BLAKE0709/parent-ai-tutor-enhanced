@@ -3,13 +3,13 @@ Main Flask application for the Parent‑AI Tutor.
 
 The app exposes two HTTP endpoints:
 
-* GET `/` renders the chat interface.
-* POST `/chat` accepts JSON data with a user message and the child’s age, 
-  forwards the request to the OpenAI API using a system prompt to adjust 
-  complexity, and returns the AI’s response as JSON.  
+* GET '/' renders the chat interface.
+* POST '/chat': accepts JSON data with a user message and the child’s age,
+  forwards the request to the OpenAI API using a system prompt to adjust
+  complexity, and returns the AI’s response as JSON.
 
-Environment variable `OPENAI_API_KEY` must be set to a valid OpenAI API key.  
-For development, copy `.env.example` to `.env` and fill in your key.
+Environment variable 'OPENAI_API_KEY' must be set to a valid OpenAI API key.
+For development, copy '.env.example' to '.env' and fill in your key.
 """
 
 from __future__ import annotations
@@ -32,10 +32,8 @@ logger = logging.getLogger(__name__)
 # Retrieve the OpenAI API key from the environment.  Do not hardcode secrets.
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if OPENAI_API_KEY:
-    # For openai>=1.0, instantiate a client; for older versions, the global key is used
     try:
-        # openai.OpenAI is available in v1.0+; fallback to setting api_key on module
-        client = openai.OpenAI(api_key=OPENAI_API_KEY)
+        client = openai.OpenAI(api_key=OPENAI_API_KEY)  # type: ignore[attr-defined]
     except AttributeError:
         openai.api_key = OPENAI_API_KEY
         client = None
@@ -48,22 +46,17 @@ else:
 # Define the Flask application
 app = Flask(__name__)
 
-
 def get_ai_response(message: str, age: int) -> str:
-    """Send a prompt to OpenAI and return the assistant’s reply.
-
-    Args:
-        message: The parent’s question or request.
-        age: The child’s age to tailor the response.
-
-    Returns:
-        The assistant’s message content.
-
-    Raises:
-        ValueError: If the API key is missing or the API call fails.
     """
+    Send a prompt to OpenAI and return the assistant’s reply.
+    Returns a fallback message if the API key is missing or the API call fails.
+    """
+    # If API key is missing, return fallback message
     if not OPENAI_API_KEY:
-        raise ValueError("OpenAI API key is not configured.")
+        return (
+            "Sorry, I can’t generate an answer right now because the AI service "
+            "is not configured. Please check your API key."
+        )
 
     # Compose the system prompt with the child’s age
     system_prompt = (
@@ -80,7 +73,6 @@ def get_ai_response(message: str, age: int) -> str:
 
     try:
         if client:
-            # For openai>=1.0: use the client to create a chat completion
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=messages,
@@ -89,7 +81,6 @@ def get_ai_response(message: str, age: int) -> str:
             )
             content = response.choices[0].message.content
         else:
-            # For older openai versions: call ChatCompletion.create directly
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=messages,
@@ -97,21 +88,15 @@ def get_ai_response(message: str, age: int) -> str:
                 max_tokens=512,
             )
             content = response["choices"][0]["message"]["content"]
-
         return content.strip()
-    except openai.error.AuthenticationError as auth_err:
-        logger.error(f"Authentication error: {auth_err}")
-        raise ValueError("Invalid OpenAI API key. Please check your configuration.")
     except Exception as e:
         logger.error(f"Error communicating with OpenAI: {e}")
-        raise ValueError("An error occurred while contacting OpenAI. Please try again later.")
-
+        return "Sorry, the AI service is currently unavailable. Please try again later."
 
 @app.route("/", methods=["GET"])
 def index() -> str:
     """Render the chat interface."""
     return render_template("index.html")
-
 
 @app.route("/chat", methods=["POST"])
 def chat() -> (Any, int):
@@ -137,13 +122,8 @@ def chat() -> (Any, int):
         return jsonify({"error": "Invalid age provided."}), 400
 
     # Ask the AI
-    try:
-        reply = get_ai_response(message, age_int)
-        return jsonify({"response": reply})
-    except ValueError as ve:
-        # On expected errors (e.g. missing key), return 500
-        return jsonify({"error": str(ve)}), 500
-
+    reply = get_ai_response(message, age_int)
+    return jsonify({"response": reply})
 
 if __name__ == "__main__":
     # When running locally via `python app.py`, enable debug mode for convenience.
