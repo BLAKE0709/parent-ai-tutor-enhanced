@@ -22,21 +22,24 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
   </head>
   <body
-    class="bg-dark d-flex flex-column justify-content-center align-items-center min-vh-100 text-light"
+    class="d-flex flex-column justify-content-center align-items-center min-vh-100"
   >
     <!-- Main container -->
-    <div class="w-100 px-3" style="max-width: 640px;">
+    <div class="central-container text-center">
       <!-- Hero header -->
-      <header class="text-center mb-4">
+      <header class="mb-4">
         <h1 class="fw-bold mb-2">🤖 Parent‑AI Tutor</h1>
-        <p class="lead mb-4">Age‑smart AI answers and mini lessons for your child&mdash;guided by you.</p>
+        <p class="lead mb-4">
+          Age‑smart AI answers and mini lessons for your child&mdash;guided by
+          you.
+        </p>
       </header>
-      <!-- Chat box -->
-      <div id="chat-box" class="mb-3"></div>
-      <!-- Form -->
+      <!-- Chat box (conversation history) -->
+      <div id="chat-box" class="mb-4"></div>
+      <!-- Form: search bar style -->
       <form id="chat-form" class="mb-3">
-        <div class="row g-2 justify-content-center align-items-center">
-          <div class="col-4 col-md-3">
+        <div class="row g-2 align-items-center">
+          <div class="col-3 col-md-2">
             <input
               type="number"
               id="age-input"
@@ -47,18 +50,18 @@
               required
             />
           </div>
-          <div class="col-8 col-md-9">
+          <div class="col">
             <input
               type="text"
               id="message-input"
               class="form-control"
-              placeholder="Ask a question..."
+              placeholder="Ask anything..."
               required
             />
           </div>
-        </div>
-        <div class="d-grid mt-2">
-          <button type="submit" class="btn btn-primary">Send</button>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
         </div>
       </form>
       <div id="error-alert" class="alert alert-danger d-none mb-3" role="alert"></div>
@@ -67,9 +70,7 @@
         <h5 class="fw-semibold text-center mb-2">
           Not sure what to ask? Try one of these:
         </h5>
-        <div class="d-flex flex-wrap gap-2 justify-content-center">
-          <!-- Suggestions will be injected by JavaScript -->
-        </div>
+        <div class="d-flex flex-wrap gap-2 justify-content-center"></div>
       </div>
     </div>
     <!-- Footer -->
@@ -115,7 +116,8 @@
         wrapper.classList.add('d-flex', 'mb-2');
         wrapper.classList.add(isUser ? 'justify-content-end' : 'justify-content-start');
         const bubble = document.createElement('div');
-        bubble.classList.add('p-2', 'chat-bubble', isUser ? 'bg-primary' : 'bg-secondary', 'text-white');
+        bubble.classList.add('chat-bubble');
+        bubble.classList.add(isUser ? 'user-bubble' : 'assistant-bubble');
         bubble.style.maxWidth = '75%';
         bubble.innerText = content;
         wrapper.appendChild(bubble);
