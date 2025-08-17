@@ -36,41 +36,51 @@ header .lead {
   margin-right: auto;
 }
 
-/* Search bar container (row) */
-#chat-form .row {
+/* Search bar container replicating ChatGPT input bubble */
+.search-bar {
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 2rem;
-  padding: 0.25rem 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
 }
 
-/* Inputs inside search bar */
-#chat-form .form-control {
+/* Inputs inside the search bar */
+.search-bar .form-control {
   background-color: transparent;
   border: none;
   border-radius: 9999px;
   color: #333333;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-#chat-form .form-control:focus {
+.search-bar .form-control:focus {
   background-color: transparent;
   color: #333333;
   box-shadow: none;
 }
 
-/* Primary button inside search bar */
-#chat-form .btn-primary {
-  background-color: transparent;
-  border: none;
-  color: #10a37f; /* green accent */
-  font-weight: 600;
-  border-radius: 9999px;
+/* Age input width */
+.age-input {
+  width: 4rem;
 }
 
-#chat-form .btn-primary:hover {
+/* Submit arrow button inside search bar */
+.send-btn {
   background-color: transparent;
-  color: #0f8c6f;
+  border: none;
+  color: #10a37f;
+  font-size: 1.5rem;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-btn:hover {
+  color: #0d9270;
 }
 
 /* Chat box for displaying messages */
