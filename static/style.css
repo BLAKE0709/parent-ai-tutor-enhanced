@@ -1,124 +1,142 @@
 /*
- * Custom dark theme for Parent‑AI Tutor
+ * Custom light theme for Parent‑AI Tutor
  *
- * Inspired by ChatGPT’s landing page: dark background with soft contrast and
- * a vibrant accent colour.  This stylesheet defines global colours,
- * typography and components such as chat bubbles, inputs and buttons.
+ * Inspired by ChatGPT’s minimalist landing page: clean light background,
+ * centred content, soft borders and a subtle accent colour.  This stylesheet
+ * defines global colours, typography and components such as the search bar,
+ * chat bubbles, inputs and buttons.
  */
 
-/* Global typography */
+/* Global typography and layout */
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #343541;
-  color: #e5e7eb;
+  background-color: #f7f9fb; /* very light background */
+  color: #333333;
   overflow-x: hidden;
 }
 
-/* Hero header styling */
+/* Main container centring */
+.central-container {
+  max-width: 640px;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+/* Hero header */
 header h1 {
-  color: #ffffff;
+  color: #1f2937; /* dark grey */
+  font-weight: 700;
 }
 
 header .lead {
-  color: #a3a3a3;
-  max-width: 42rem;
+  color: #6b7280; /* medium grey */
+  max-width: 40rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Chat box */
-#chat-box {
-  background-color: #444654;
-  border: 1px solid #565869;
-  border-radius: 0.5rem;
-  height: 50vh;
-  overflow-y: auto;
-  padding: 1rem;
+/* Search bar container (row) */
+#chat-form .row {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 2rem;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-/* Form controls */
-.form-control {
-  background-color: #40414f;
-  border: 1px solid #565869;
-  color: #e5e7eb;
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
+/* Inputs inside search bar */
+#chat-form .form-control {
+  background-color: transparent;
+  border: none;
+  border-radius: 9999px;
+  color: #333333;
 }
 
-.form-control:focus {
-  background-color: #40414f;
-  color: #e5e7eb;
-  border-color: #10a37f;
+#chat-form .form-control:focus {
+  background-color: transparent;
+  color: #333333;
   box-shadow: none;
 }
 
-/* Primary button */
-.btn-primary {
-  background-color: #10a37f;
-  border-color: #10a37f;
-  color: #ffffff;
-}
-
-.btn-primary:hover {
-  background-color: #0e8d6f;
-  border-color: #0e8d6f;
-  color: #ffffff;
-}
-
-.btn-primary:disabled,
-.btn-primary:disabled:hover {
-  background-color: #6f7b77;
-  border-color: #6f7b77;
-  color: #ffffff;
-  opacity: 0.65;
-}
-
-/* Outline secondary buttons (suggestions) */
-.btn-outline-secondary {
-  background-color: #40414f;
-  color: #e5e7eb;
-  border: 1px solid #565869;
+/* Primary button inside search bar */
+#chat-form .btn-primary {
+  background-color: transparent;
+  border: none;
+  color: #10a37f; /* green accent */
+  font-weight: 600;
   border-radius: 9999px;
-  font-size: 0.875rem;
 }
 
-.btn-outline-secondary:hover {
-  background-color: #565869;
-  color: #ffffff;
-  border-color: #565869;
+#chat-form .btn-primary:hover {
+  background-color: transparent;
+  color: #0f8c6f;
+}
+
+/* Chat box for displaying messages */
+#chat-box {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  min-height: 300px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 /* Chat bubbles */
 .chat-bubble {
   border-radius: 1rem;
-  white-space: pre-wrap;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   word-break: break-word;
+  white-space: pre-wrap;
 }
 
-/* User message bubble (primary) */
-.bg-primary {
-  background-color: #10a37f !important;
+/* User message bubble */
+.user-bubble {
+  background-color: #10a37f;
+  color: #ffffff;
+  align-self: flex-end;
 }
 
-/* Assistant message bubble (secondary) */
-.bg-secondary {
-  background-color: #444654 !important;
-  border: 1px solid #565869;
-}
-
-/* Text colour override */
-.text-white {
-  color: #e5e7eb !important;
+/* Assistant message bubble */
+.assistant-bubble {
+  background-color: #f2f4f7;
+  color: #333333;
+  border: 1px solid #e5e7eb;
+  align-self: flex-start;
 }
 
 /* Suggestions heading */
 #suggestions h5 {
-  color: #d1d5db;
+  color: #6b7280;
 }
 
-/* Footer styling */
+/* Suggestion buttons */
+#suggestions .btn {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  color: #374151;
+  font-size: 0.875rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+#suggestions .btn:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+/* Error alert styling */
+.alert-danger {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+/* Footer */
 footer {
-  color: #6b7280;
+  color: #9ca3af;
 }
