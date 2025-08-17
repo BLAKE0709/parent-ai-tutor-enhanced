@@ -27,41 +27,36 @@
     <!-- Main container -->
     <div class="central-container text-center">
       <!-- Hero header -->
-      <header class="mb-4">
-        <h1 class="fw-bold mb-2">🤖 Parent‑AI Tutor</h1>
-        <p class="lead mb-4">
-          Age‑smart AI answers and mini lessons for your child&mdash;guided by
-          you.
+      <header class="mb-4 text-center">
+        <h2 class="fw-bold mb-3">What’s on your mind today?</h2>
+        <p class="text-muted mb-4">
+          Age‑smart AI answers and mini lessons for your child—guided by you.
         </p>
       </header>
       <!-- Chat box (conversation history) -->
       <div id="chat-box" class="mb-4"></div>
-      <!-- Form: search bar style -->
+      <!-- Form: central search bubble -->
       <form id="chat-form" class="mb-3">
-        <div class="row g-2 align-items-center">
-          <div class="col-3 col-md-2">
-            <input
-              type="number"
-              id="age-input"
-              class="form-control"
-              placeholder="Age"
-              min="1"
-              max="18"
-              required
-            />
-          </div>
-          <div class="col">
-            <input
-              type="text"
-              id="message-input"
-              class="form-control"
-              placeholder="Ask anything..."
-              required
-            />
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Send</button>
-          </div>
+        <div class="search-bar d-flex align-items-center gap-2">
+          <input
+            type="number"
+            id="age-input"
+            class="form-control age-input"
+            placeholder="Age"
+            min="1"
+            max="18"
+            required
+          />
+          <input
+            type="text"
+            id="message-input"
+            class="form-control flex-grow-1"
+            placeholder="Ask anything..."
+            required
+          />
+          <button type="submit" class="btn send-btn">
+            &rarr;
+          </button>
         </div>
       </form>
       <div id="error-alert" class="alert alert-danger d-none mb-3" role="alert"></div>
