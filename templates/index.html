@@ -30,23 +30,28 @@
       <header class="mb-4 text-center">
         <h2 class="fw-bold mb-3">What’s on your mind today?</h2>
         <p class="text-muted mb-4">
-          Age‑smart AI answers and mini lessons for your child—guided by you.
+          Age‑smart AI answers<br />
+          &amp; mini lessons
         </p>
       </header>
       <!-- Chat box (conversation history) -->
       <div id="chat-box" class="mb-4"></div>
-      <!-- Form: central search bubble -->
+      <!-- Form: central search bubble with age input on top -->
       <form id="chat-form" class="mb-3">
-        <div class="search-bar d-flex align-items-center gap-2">
+        <!-- Age container sits above the prompt bar -->
+        <div class="age-container text-center">
           <input
             type="number"
             id="age-input"
-            class="form-control age-input"
+            class="age-input"
             placeholder="Age"
             min="1"
             max="18"
             required
           />
+        </div>
+        <!-- Prompt bar -->
+        <div class="search-bar d-flex align-items-center">
           <input
             type="text"
             id="message-input"
