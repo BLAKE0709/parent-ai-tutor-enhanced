@@ -21,6 +21,9 @@ body {
   max-width: 640px;
   width: 100%;
   padding: 0 1rem;
+  /* Center the container horizontally */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Hero header */
@@ -50,15 +53,22 @@ header p {
 }
 
 /* Age input container above the search bar */
+/* Age container wraps the age pill and overlaps the search bar.  The negative
+   margin lifts the pill upwards so it sits over the top edge of the search
+   bar.  A higher z-index ensures it appears above the bar’s border. */
 .age-container {
   display: flex;
   justify-content: center;
-  margin-bottom: -0.75rem; /* overlap slightly with the search bar */
+  position: relative;
+  z-index: 2;
+  /* Raise the age pill more for a pronounced overlay effect */
+  margin-bottom: -1.2rem;
 }
 
 /* Standalone age input on top of search bar */
+/* Age pill styling: smaller width and pill shape */
 .age-container .age-input {
-  width: 4rem;
+  width: 3rem;
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 9999px;
@@ -92,9 +102,9 @@ header p {
   box-shadow: none;
 }
 
-/* Age input width */
+/* General age input width: ensure consistency with pill sizing */
 .age-input {
-  width: 4rem;
+  width: 3rem;
 }
 
 /* Submit arrow button inside search bar */
